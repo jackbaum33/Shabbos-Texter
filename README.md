@@ -4,7 +4,7 @@ the proper format for the csv:
 name,phonenumber
 john,1234567890 (no whitespace or characters in phone number)
 
-the functionalities of the program:
+The functionalities of the program:
 1. text each person in the list
 2. text only a subset of the names (user can enter specific names individually)
 3. start from a specific point on the list
