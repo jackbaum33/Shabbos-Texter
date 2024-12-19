@@ -56,7 +56,7 @@ class WhatsappMessenger():
             return
 
         try:
-            search_box_xpath ='//*[@id="app"]/div/div[3]/div[2]/div[1]/span/div/span/div/div[1]/div[2]/div[2]/div/div/p'
+            search_box_xpath ='//*[@id="app"]/div/div[3]/div/div[2]/div[1]/span/div/span/div/div[1]/div[2]/div[2]/div/div/p'
             search_box = WDWait(self.driver, 20).until(
                 EC.presence_of_element_located((By.XPATH, search_box_xpath))
             )
