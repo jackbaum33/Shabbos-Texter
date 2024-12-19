@@ -1,8 +1,7 @@
 "Shabbos Texter": Terminal-interactive semi automatic Whatsapp Texter using Python scripting and Selenium. The user should clone the repo and then add their own .csv files
 (in my code, they are named 'thursday_names.csv','friday_names.csv','all_names.csv')
 the proper format for the csv:
-name,phonenumber
-john,1234567890 (no whitespace or characters in phone number)
+name,phonenumber (no whitespace or characters in phone number) 
 
 The functionalities of the program:
 1. text each person in the list
