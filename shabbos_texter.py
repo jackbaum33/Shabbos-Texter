@@ -170,7 +170,7 @@ def main():
     difference %= 60
     num_seconds = difference
     print('finished with texts!')
-    print(f"time taken: {num_hours} hours, {num_minutes} minutes, {num_seconds:.2f} seconds")
+    print(f"time taken: {num_hours} hours, {num_minutes} minutes, {int(num_seconds)} seconds")
     print("Metrics:")
     if results is None:
         print('No texts were sent.')
