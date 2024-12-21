@@ -162,6 +162,7 @@ def main():
         results = None
         print('quitting')
     
+    print("-------------------------------")
     end_time = time.time()
     difference = end_time - start_time
     num_hours = int(difference / 3600)
