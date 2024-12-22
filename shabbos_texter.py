@@ -163,8 +163,7 @@ def main():
         print('quitting')
     
     print("-------------------------------")
-    end_time = time.time()
-    difference = end_time - start_time
+    difference = time.time() - start_time
     num_hours = int(difference / 3600)
     difference %= 3600
     num_minutes = int(difference / 60)
