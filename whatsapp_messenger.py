@@ -47,7 +47,7 @@ class WhatsappMessenger():
     def send_text(self, body: str = None, name: str = None, phone_number: str = None, **kwargs) -> None: 
         time.sleep(1)
         try:
-            new_message_xpath = '//div[@title="New chat"]'
+            new_message_xpath = '//*[@id="app"]/div/div[3]/div/div[3]/header/header/div/span/div/div[1]/button'
             WDWait(self.driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, new_message_xpath))
             ).click()
@@ -65,12 +65,10 @@ class WhatsappMessenger():
             time.sleep(1)
             for char in phone_number:
                 search_box.send_keys(char)
-                time.sleep(0.08)
-            #time.sleep(2)
+                time.sleep(0.15)
         except TimeoutException:
             print("Error: Search box not found or not interactable.")
             return
-        time.sleep(2)
         
         try:
             input_box_xpath = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div[1]/p'
