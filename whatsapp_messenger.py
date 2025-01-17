@@ -65,7 +65,7 @@ class WhatsappMessenger():
             time.sleep(1)
             for char in phone_number:
                 search_box.send_keys(char)
-                time.sleep(0.15)
+                time.sleep(0.115)
         except TimeoutException:
             print("Error: Search box not found or not interactable.")
             return
