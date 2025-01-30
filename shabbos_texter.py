@@ -1,4 +1,5 @@
 from whatsapp_messenger import WhatsappMessenger
+from datetime import datetime
 import time
 
 def send_texts(filename: str) -> dict:
@@ -9,7 +10,7 @@ def send_texts(filename: str) -> dict:
     results['other'] = 0
     whatsapp_texter = WhatsappMessenger()
     whatsapp_texter.wait_for_qr_scan()
-    print(f'starting texts at {time.time()}:')
+    print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
     with open(filename,'r') as file:
         for line in file:
             info = line.split(',')
