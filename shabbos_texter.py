@@ -59,6 +59,7 @@ def main():
         results['other'] = 0
         names = input("enter the people you would like to text, separated by commas: ")
         name_list = names.split(',')
+        print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
         with open('all_names.csv', 'r') as file:
             for line in file:
                 info = line.split(',')
@@ -93,6 +94,7 @@ def main():
 
     elif(choice=='m'):
         starting_name = input("Enter a name to begin with: ")
+        print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
         whatsapp_texter = WhatsappMessenger()
         whatsapp_texter.wait_for_qr_scan()
         results = {}
@@ -170,7 +172,7 @@ def main():
     num_minutes = int(difference / 60)
     difference %= 60
     num_seconds = difference
-    print('finished with texts!')
+    print(f'finished with texts at {datetime.now().strftime("%I:%M:%S %p")}')
     print(f"time taken: {num_hours} hours, {num_minutes} minutes, {int(num_seconds)} seconds")
     print("Metrics:")
     if results is None:
