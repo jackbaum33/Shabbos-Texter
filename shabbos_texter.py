@@ -8,6 +8,7 @@ def send_texts(filename: str) -> dict:
     results['smiley'] = 0
     results['exclamation'] = 0
     results['other'] = 0
+    num_texts = 1
     whatsapp_texter = WhatsappMessenger()
     whatsapp_texter.wait_for_qr_scan()
     print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
@@ -21,7 +22,8 @@ def send_texts(filename: str) -> dict:
                 break
             phone_number = info[1]
             name = info[0]
-            shabbos_text = input(f"{name}: ")
+            shabbos_text = input("f{num_texts}: {name}: ")
+            num_texts += 1
             if(shabbos_text == 's'):
                 print(f'skipping {name}')
                 continue
