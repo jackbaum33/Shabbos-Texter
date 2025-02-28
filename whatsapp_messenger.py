@@ -45,7 +45,7 @@ class WhatsappMessenger():
             self.driver.quit()
     
     def send_text(self, body: str = None, name: str = None, phone_number: str = None, **kwargs) -> None: 
-        time.sleep(1)
+        #time.sleep(1)
         try:
             new_message_xpath = '//*[@id="app"]/div/div[3]/div/div[3]/header/header/div/span/div/div[1]/button'
             WDWait(self.driver, 20).until(
@@ -56,7 +56,7 @@ class WhatsappMessenger():
             return
 
         try:
-            search_box_xpath ='//*[@id="app"]/div/div[3]/div/div[2]/div[1]/span/div/span/div/div[1]/div[2]/div[2]/div/div/p'
+            search_box_xpath ='//*[@id="app"]/div/div[3]/div/div[2]/div[1]/span/div/span/div/div[1]/div[2]/div/div/div[1]/p'
             search_box = WDWait(self.driver, 20).until(
                 EC.presence_of_element_located((By.XPATH, search_box_xpath))
             )

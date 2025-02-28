@@ -22,7 +22,7 @@ def send_texts(filename: str) -> dict:
                 break
             phone_number = info[1]
             name = info[0]
-            shabbos_text = input(f"{num_texts}: {name}: ")
+            shabbos_text = input(f"{num_texts}. {name}: ")
             num_texts += 1
             if(shabbos_text == 's'):
                 print(f'skipping {name}')
@@ -46,13 +46,13 @@ def send_texts(filename: str) -> dict:
 def main():
     start_time = time.time()
     choice = input('enter an option (thursday,friday,all,custom,middle,quit) (t/f/a/c/m/q): ')
-    if(choice=='t'):
+    if choice=='t':
         results = send_texts(filename='thursday_names.csv')
-    elif(choice=='f'):
+    elif choice=='f':
         results = send_texts(filename='friday_names.csv')
-    elif(choice=='a'):
+    elif choice=='a':
         results = send_texts(filename='all_names.csv')
-    elif(choice == 'c'):
+    elif choice == 'c':
         whatsapp_texter = WhatsappMessenger()
         results = {}
         results['total'] = 0
@@ -94,7 +94,7 @@ def main():
                                       name=name,
                                       phone_number=phone_number)
 
-    elif(choice=='m'):
+    elif choice=='m':
         starting_name = input("Enter a name to begin with: ")
         print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
         whatsapp_texter = WhatsappMessenger()
@@ -176,12 +176,14 @@ def main():
     num_seconds = difference
     print(f'finished with texts at {datetime.now().strftime("%I:%M:%S %p")}')
     print(f"time taken: {num_hours} hours, {num_minutes} minutes, {int(num_seconds)} seconds")
+    total_minutes = num_minutes + (num_hours*60)
     print("Metrics:")
     if results is None:
         print('No texts were sent.')
     elif results['total'] == 0:
         print('No texts were sent.')
     else:
+        print(f"texts per minute: {total_minutes/results['total']}")
         smiley_ratio = float(results['smiley']/results['total']) * 100
         exclamation_ratio = float(results['exclamation']/results['total']) * 100
         other_ratio = float(results['other']/results['total']) * 100
