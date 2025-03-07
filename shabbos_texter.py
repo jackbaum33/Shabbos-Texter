@@ -183,7 +183,7 @@ def main():
     elif results['total'] == 0:
         print('No texts were sent.')
     else:
-        print(f"texts per minute: {total_minutes/results['total']}")
+        print(f"texts per minute: {results['total']/total_minutes}")
         smiley_ratio = float(results['smiley']/results['total']) * 100
         exclamation_ratio = float(results['exclamation']/results['total']) * 100
         other_ratio = float(results['other']/results['total']) * 100
