@@ -97,6 +97,7 @@ def main():
     elif choice=='m':
         starting_name = input("Enter a name to begin with: ")
         print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
+        num_texts = 1
         whatsapp_texter = WhatsappMessenger()
         whatsapp_texter.wait_for_qr_scan()
         results = {}
@@ -115,10 +116,12 @@ def main():
                     break
                 if name != starting_name:
                     print(name)
+                    num_texts += 1
                     time.sleep(0.01)
                     continue
                 phone_number = info[1]
-                shabbos_text = input(f"{name}: ")
+                shabbos_text = input(f"{num_texts}. {name}: ")
+                num_texts += 1
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
                     continue
