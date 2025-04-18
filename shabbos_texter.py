@@ -148,7 +148,7 @@ def main():
                     break
                 phone_number = info[1]
                 name = info[0]
-                shabbos_text = input(f"{name}: ")
+                shabbos_text = input(f"{num_texts}. {name}: ")
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
                     continue
@@ -162,6 +162,7 @@ def main():
                     results['smiley'] +=1
                 else:
                     results['other'] += 1
+                num_texts += 1
                 whatsapp_texter.send_text(body=shabbos_text,
                                       name=name,
                                       phone_number=phone_number)
