@@ -62,7 +62,7 @@ class WhatsappMessenger():
             )
             search_box.clear()
             self.driver.execute_script("arguments[0].focus();", search_box)
-            time.sleep(1)
+            time.sleep(0.5)
             for char in phone_number:
                 search_box.send_keys(char)
                 time.sleep(0.115)
