@@ -23,6 +23,8 @@ def send_texts(filename: str) -> dict:
             phone_number = info[1]
             name = info[0]
             shabbos_text = input(f"{num_texts}. {name}: ")
+            while shabbos_text != '':
+                shabbos_text = input(f"{num_texts}. {name}: ")
             num_texts += 1
             if(shabbos_text == 's'):
                 print(f'skipping {name}')
