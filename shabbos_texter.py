@@ -79,6 +79,8 @@ def main():
                     continue
                 phone_number = info[1]
                 shabbos_text = input(f"{name}: ")
+                while shabbos_text != '':
+                    shabbos_text = input(f"{name}: ")
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
                     continue
@@ -123,6 +125,8 @@ def main():
                     continue
                 phone_number = info[1]
                 shabbos_text = input(f"{num_texts}. {name}: ")
+                while shabbos_text != '':
+                    shabbos_text = input(f"{num_texts}. {name}: ")
                 num_texts += 1
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
@@ -151,6 +155,8 @@ def main():
                 phone_number = info[1]
                 name = info[0]
                 shabbos_text = input(f"{num_texts}. {name}: ")
+                while shabbos_text != '':
+                    shabbos_text = input(f"{num_texts}. {name}: ")
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
                     continue
