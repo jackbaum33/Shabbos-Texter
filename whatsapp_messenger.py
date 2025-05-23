@@ -44,7 +44,7 @@ class WhatsappMessenger():
             print("TimeoutException: QR code not scanned in time or WhatsApp Web not loaded properly.")
             self.driver.quit()
     
-    def send_text(self, body: str = None, name: str = None, phone_number: str = None, **kwargs) -> None: 
+    def send_text(self, text: str = None, name: str = None, phone_number: str = None, **kwargs) -> None: 
         #time.sleep(1)
         try:
             new_message_xpath = '//*[@id="app"]/div/div[3]/div/div[3]/header/header/div/span/div/div[1]/button'
@@ -77,7 +77,7 @@ class WhatsappMessenger():
             )
             self.driver.execute_script("arguments[0].focus();", input_box)
             input_box.clear()
-            input_box.send_keys(body)
+            input_box.send_keys(text)
             input_box.send_keys(Keys.ENTER)
         except TimeoutException:
             print(f"Error: Could not send message to {name}.")
