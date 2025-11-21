@@ -47,7 +47,7 @@ class WhatsappMessenger():
     def send_text(self, text: str = None, name: str = None, phone_number: str = None, **kwargs) -> None: 
         #time.sleep(1)
         try:
-            new_message_xpath = '//*[@id="app"]/div[1]/div/div[3]/div/div[4]/header/header/div/span/div/div[1]/span/div/div/div[1]/div[1]/span'
+            new_message_xpath = '//*[@id="app"]/div/div/div[3]/div/div[4]/header/header/div/span/div/div[1]/span/button/div/div'
             WDWait(self.driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, new_message_xpath))
             ).click()
