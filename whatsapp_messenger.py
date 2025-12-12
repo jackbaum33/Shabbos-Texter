@@ -71,7 +71,7 @@ class WhatsappMessenger():
             return
         
         try:
-            input_box_xpath = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div[1]/p'
+            input_box_xpath = '//*[@id="main"]/footer/div[1]/div/span/div/div/div/div[3]/div[1]/p'
             input_box = WDWait(self.driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, input_box_xpath))
             )
