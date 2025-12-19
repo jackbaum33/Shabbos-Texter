@@ -1,4 +1,5 @@
 from whatsapp_messenger import WhatsappMessenger
+from imessage_messenger import ImessageSender
 from datetime import datetime
 import time
 
@@ -9,8 +10,7 @@ def send_texts(filename: str) -> dict:
     results['exclamation'] = 0
     results['other'] = 0
     num_texts = 1
-    whatsapp_texter = WhatsappMessenger()
-    whatsapp_texter.wait_for_qr_scan()
+    imessage = ImessageSender()
     print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
     with open(filename,'r') as file:
         for line in file:
@@ -39,9 +39,7 @@ def send_texts(filename: str) -> dict:
                 results['smiley'] +=1
             else:
                 results['other'] += 1
-            whatsapp_texter.send_text(text=shabbos_text,
-                                      name=name,
-                                      phone_number=phone_number)
+            imessage.send_text(phone_number=phone_number,message=shabbos_text)
 
     return results
             
@@ -55,7 +53,7 @@ def main():
     elif choice=='a':
         results = send_texts(filename='all_names.csv')
     elif choice == 'c':
-        whatsapp_texter = WhatsappMessenger()
+        imessage = ImessageSender()
         results = {}
         results['total'] = 0
         results['smiley'] = 0
@@ -94,16 +92,13 @@ def main():
                     results['smiley'] +=1
                 else:
                     results['other'] += 1
-                whatsapp_texter.send_text(text=shabbos_text,
-                                      name=name,
-                                      phone_number=phone_number)
+                imessage.send_text(phone_number=phone_number,message=shabbos_text)
 
     elif choice=='m':
         starting_name = input("Enter a name to begin with: ")
         print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
         num_texts = 1
-        whatsapp_texter = WhatsappMessenger()
-        whatsapp_texter.wait_for_qr_scan()
+        imessage = ImessageSender()
         results = {}
         results['total'] = 0
         results['smiley'] = 0
@@ -141,9 +136,7 @@ def main():
                     results['smiley'] +=1
                 else:
                     results['other'] += 1
-                whatsapp_texter.send_text(text=shabbos_text,
-                                      name=name,
-                                      phone_number=phone_number)
+                imessage.send_text(phone_number=phone_number,message=shabbos_text)
                 break
             for line in file:
                 info = line.split(',')
@@ -171,9 +164,7 @@ def main():
                 else:
                     results['other'] += 1
                 num_texts += 1
-                whatsapp_texter.send_text(text=shabbos_text,
-                                      name=name,
-                                      phone_number=phone_number)
+                imessage.send_text(phone_number=phone_number,message=shabbos_text)
 
     else:
         results = None
