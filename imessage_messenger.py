@@ -8,12 +8,17 @@ class ImessageSender:
         phone_number = self.format_phone_number(phone_number)
         message = message.replace('\\', '\\\\').replace('"', '\\"')
         
-        # This script tries to send via any available service
+        # Enhanced AppleScript with better error handling
         applescript = f'''
         tell application "Messages"
-            set targetService to 1st account whose service type = iMessage
-            set targetBuddy to participant "{phone_number}" of targetService
-            send "{message}" to targetBuddy
+            try
+                set targetService to 1st account whose service type = iMessage
+                set targetBuddy to participant "{phone_number}" of targetService
+                send "{message}" to targetBuddy
+                return "SUCCESS"
+            on error errMsg
+                return "ERROR: " & errMsg
+            end try
         end tell
         '''
         
@@ -23,9 +28,23 @@ class ImessageSender:
                                 text=True, 
                                 check=True,
                                 timeout=10)
-            return True
-        except subprocess.CalledProcessError as e:
+            
+            output = result.stdout.strip()
+            
+            # Check if the AppleScript returned an error
+            if output.startswith("ERROR:"):
+                print(f"AppleScript error: {output}")
+                return False
+            
             return False
+            
+        except subprocess.CalledProcessError as e:
+            print(f"Subprocess error: {e.stderr}")
+            return False
+        except subprocess.TimeoutExpired:
+            print("Send operation timed out")
+            return False
+        
 
     def format_phone_number(self, phone_number):
         """Format phone number to include country code"""

@@ -11,6 +11,7 @@ def send_texts(filename: str) -> dict:
     results['other'] = 0
     num_texts = 1
     imessage = ImessageSender()
+    failed_names = []
     print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
     with open(filename,'r') as file:
         for line in file:
@@ -41,8 +42,10 @@ def send_texts(filename: str) -> dict:
                 results['other'] += 1
             valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
             if not valid:
-                with open("failed_names.txt","w") as outfile:
-                    file.write(f"{name}\n")
+                    failed_names.append(name)
+    outfile = open("failed_names.txt","w")
+    for name in failed_names:
+        outfile.write(f"{name}\n")
 
     return results
             
@@ -62,6 +65,7 @@ def main():
         results['smiley'] = 0
         results['exclamation'] = 0
         results['other'] = 0
+        failed_names = []
         names = input("enter the people you would like to text, separated by commas: ")
         name_list = names.split(',')
         print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
@@ -97,8 +101,10 @@ def main():
                     results['other'] += 1
                 valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
                 if not valid:
-                    with open("failed_names.txt","w") as outfile:
-                        file.write(f"{name}\n")
+                        failed_names.append(name)
+        outfile = open("failed_names.txt","w")
+        for name in failed_names:
+            outfile.write(f"{name}\n")
 
     elif choice=='m':
         starting_name = input("Enter a name to begin with: ")
@@ -110,6 +116,7 @@ def main():
         results['smiley'] = 0
         results['exclamation'] = 0
         results['other'] = 0
+        failed_names = []
         with open('all_names.csv', 'r') as file:
             for line in file:
                 info = line.split(',')
@@ -144,8 +151,7 @@ def main():
                     results['other'] += 1
                 valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
                 if not valid:
-                    with open("failed_names.txt","w") as outfile:
-                        file.write(f"{name}\n")
+                        failed_names.append(name)
                 break
             for line in file:
                 info = line.split(',')
@@ -175,8 +181,10 @@ def main():
                 num_texts += 1
                 valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
                 if not valid:
-                    with open("failed_names.txt","w") as outfile:
-                        file.write(f"{name}\n")
+                        failed_names.append(name)
+        outfile = open("failed_names.txt","w")
+        for name in failed_names:
+            outfile.write(f"{name}\n")
 
     else:
         results = None
