@@ -1,4 +1,3 @@
-from whatsapp_messenger import WhatsappMessenger
 from imessage_messenger import ImessageSender
 from datetime import datetime
 import time
