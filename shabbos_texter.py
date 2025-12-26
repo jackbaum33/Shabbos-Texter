@@ -39,7 +39,10 @@ def send_texts(filename: str) -> dict:
                 results['smiley'] +=1
             else:
                 results['other'] += 1
-            imessage.send_text(phone_number=phone_number,message=shabbos_text)
+            valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
+            if not valid:
+                with open("failed_names.txt","w") as outfile:
+                    file.write(f"{name}\n")
 
     return results
             
@@ -92,7 +95,10 @@ def main():
                     results['smiley'] +=1
                 else:
                     results['other'] += 1
-                imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                if not valid:
+                    with open("failed_names.txt","w") as outfile:
+                        file.write(f"{name}\n")
 
     elif choice=='m':
         starting_name = input("Enter a name to begin with: ")
@@ -136,7 +142,10 @@ def main():
                     results['smiley'] +=1
                 else:
                     results['other'] += 1
-                imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                if not valid:
+                    with open("failed_names.txt","w") as outfile:
+                        file.write(f"{name}\n")
                 break
             for line in file:
                 info = line.split(',')
@@ -164,7 +173,10 @@ def main():
                 else:
                     results['other'] += 1
                 num_texts += 1
-                imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                if not valid:
+                    with open("failed_names.txt","w") as outfile:
+                        file.write(f"{name}\n")
 
     else:
         results = None
