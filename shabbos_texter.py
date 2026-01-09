@@ -11,6 +11,7 @@ def send_texts(filename: str) -> dict:
     num_texts = 1
     imessage = ImessageSender()
     failed_names = []
+    previous_name = None
     print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
     with open(filename,'r') as file:
         for line in file:
@@ -23,11 +24,15 @@ def send_texts(filename: str) -> dict:
             phone_number = info[1]
             name = info[0]
             shabbos_text = input(f"{num_texts}. {name}: ")
-            while shabbos_text == '':
+            while shabbos_text == '' or shabbos_text == 'f':
+                if shabbos_text == 'f' and previous_name is not None:
+                    failed_names.append(previous_name)
+                    print(f'marked {previous_name} as failed')
                 shabbos_text = input(f"{num_texts}. {name}: ")
             num_texts += 1
             if(shabbos_text == 's'):
                 print(f'skipping {name}')
+                previous_name = name
                 continue
             if(shabbos_text == 'q'):
                 break
@@ -39,9 +44,8 @@ def send_texts(filename: str) -> dict:
                 results['smiley'] +=1
             else:
                 results['other'] += 1
-            valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
-            if not valid:
-                    failed_names.append(name)
+            imessage.send_text(phone_number=phone_number,message=shabbos_text)
+            previous_name = name
     outfile = open("failed_names.txt","w")
     for name in failed_names:
         outfile.write(f"{name}\n")
@@ -65,6 +69,7 @@ def main():
         results['exclamation'] = 0
         results['other'] = 0
         failed_names = []
+        previous_name = None
         names = input("enter the people you would like to text, separated by commas: ")
         name_list = names.split(',')
         print(f'starting texts at {datetime.now().strftime("%I:%M:%S %p")}:')
@@ -83,10 +88,14 @@ def main():
                     continue
                 phone_number = info[1]
                 shabbos_text = input(f"{name}: ")
-                while shabbos_text == '':
+                while shabbos_text == '' or shabbos_text == 'f':
+                    if shabbos_text == 'f' and previous_name is not None:
+                        failed_names.append(previous_name)
+                        print(f'marked {previous_name} as failed')
                     shabbos_text = input(f"{name}: ")
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
+                    previous_name = name
                     continue
                 if(shabbos_text == 'q'):
                     break
@@ -98,9 +107,8 @@ def main():
                     results['smiley'] +=1
                 else:
                     results['other'] += 1
-                valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
-                if not valid:
-                        failed_names.append(name)
+                imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                previous_name = name
         outfile = open("failed_names.txt","w")
         for name in failed_names:
             outfile.write(f"{name}\n")
@@ -116,6 +124,7 @@ def main():
         results['exclamation'] = 0
         results['other'] = 0
         failed_names = []
+        previous_name = None
         with open('all_names.csv', 'r') as file:
             for line in file:
                 info = line.split(',')
@@ -132,11 +141,15 @@ def main():
                     continue
                 phone_number = info[1]
                 shabbos_text = input(f"{num_texts}. {name}: ")
-                while shabbos_text == '':
+                while shabbos_text == '' or shabbos_text == 'f':
+                    if shabbos_text == 'f' and previous_name is not None:
+                        failed_names.append(previous_name)
+                        print(f'marked {previous_name} as failed')
                     shabbos_text = input(f"{num_texts}. {name}: ")
                 num_texts += 1
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
+                    previous_name = name
                     continue
                 if(shabbos_text == 'q'):
                     break
@@ -148,9 +161,8 @@ def main():
                     results['smiley'] +=1
                 else:
                     results['other'] += 1
-                valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
-                if not valid:
-                        failed_names.append(name)
+                imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                previous_name = name
                 break
             for line in file:
                 info = line.split(',')
@@ -162,10 +174,14 @@ def main():
                 phone_number = info[1]
                 name = info[0]
                 shabbos_text = input(f"{num_texts}. {name}: ")
-                while shabbos_text == '':
+                while shabbos_text == '' or shabbos_text == 'f':
+                    if shabbos_text == 'f' and previous_name is not None:
+                        failed_names.append(previous_name)
+                        print(f'marked {previous_name} as failed')
                     shabbos_text = input(f"{num_texts}. {name}: ")
                 if(shabbos_text == 's'):
                     print(f'skipping {name}')
+                    previous_name = name
                     continue
                 if(shabbos_text == 'q'):
                     break
@@ -178,9 +194,8 @@ def main():
                 else:
                     results['other'] += 1
                 num_texts += 1
-                valid = imessage.send_text(phone_number=phone_number,message=shabbos_text)
-                if not valid:
-                        failed_names.append(name)
+                imessage.send_text(phone_number=phone_number,message=shabbos_text)
+                previous_name = name
         outfile = open("failed_names.txt","w")
         for name in failed_names:
             outfile.write(f"{name}\n")
